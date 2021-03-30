@@ -13,7 +13,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
 var serviceAccount = require("./configs/burj-al-arab-19c6c-firebase-adminsdk-y7ty3-3f06e46152.json");
 
 admin.initializeApp({
@@ -68,3 +67,5 @@ client.connect((err) => {
   
 });
 app.listen(port);
+
+
