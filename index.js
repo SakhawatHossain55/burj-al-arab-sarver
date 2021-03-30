@@ -6,7 +6,7 @@ const MongoClient = require("mongodb").MongoClient;
 require('dotenv').config()
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.0hcik.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
-const port = 5000;
+const port = process.env.PORT || 5000
 
 const app = express();
 
@@ -18,7 +18,7 @@ var serviceAccount = require("./configs/burj-al-arab-19c6c-firebase-adminsdk-y7t
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.FIRE_DB
+  databaseURL: "https://burj-al-arab.firebaseio.com"
 });
 
 const client = new MongoClient(uri, {
@@ -61,6 +61,10 @@ client.connect((err) => {
         res.status(401).send('un-authorize access')
     }
   });
+
+  app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+  
 });
-app.listen(process.env.PORT || port);
-// closed
+app.listen(port);
