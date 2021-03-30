@@ -4,7 +4,7 @@ const cors = require("cors");
 const admin = require("firebase-admin");
 const MongoClient = require("mongodb").MongoClient;
 require('dotenv').config()
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.0hcik.mongodb.net/borjAlArab?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.0hcik.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
 const port = 5000;
 
 const app = express();
@@ -61,4 +61,7 @@ client.connect((err) => {
     }
   });
 });
-app.listen(port);
+app.listen(process.env.PORT || port);
+
+
+
